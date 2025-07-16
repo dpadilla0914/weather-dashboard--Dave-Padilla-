@@ -7,6 +7,7 @@ import requests
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
+from datetime import datetime
 
 def get_forecast(city, days = 7):
     geocode_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={API_KEY}"
@@ -20,7 +21,7 @@ def get_forecast(city, days = 7):
     lat = data[0]["lat"]
     lon = data[0]["lon"]
 
-    forecast_url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=current,minutely,hourly,alerts&units=metric&appid={API_KEY}"
+    forecast_url = (f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude=current,minutely,hourly,alerts&units=metric&appid={API_KEY}")
     response = requests.get(forecast_url)
     forecast_data = response.json()
 

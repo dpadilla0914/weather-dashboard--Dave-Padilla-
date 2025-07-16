@@ -26,7 +26,7 @@ def save_favorites(cities):
         json.dump(cities, file, indent = 4)
 
 def add_favorite(city):
-    city = city.strip().title()
+    city = city.strip().title() #Clean and standardize city name
     cities = load_favorites()
 
     if city not in cities:

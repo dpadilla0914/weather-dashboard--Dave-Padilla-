@@ -6,20 +6,24 @@ Feature: Weather History Tracker
 
 import csv
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 
 HISTORY_FILE = "weather_history.csv"
 
 def save_daily_weather(city, date, temp, condition):
+    
     file_exists = os.path.exists(HISTORY_FILE)
 
     with open(HISTORY_FILE, "a", newline='') as csvfile:
         writer = csv.writer(csvfile)
+        
         if not file_exists:
             writer.writerow(["city", "date", "temp", "condition"])
+        
         writer.writerow([city, date, temp, condition])
 
 def read_last_seven_days():
+    
     if not os.path.exists(HISTORY_FILE):
         return []
 
@@ -28,6 +32,7 @@ def read_last_seven_days():
 
     with open(HISTORY_FILE, "r") as csvfile:
         reader = csv.DictReader(csvfile)
+       
         for row in reader:
             try:
                 row_date = datetime.strptime(row["date"], "%Y-%m-%d").date()

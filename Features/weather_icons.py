@@ -21,7 +21,7 @@ def draw_weather_icons(canvas, condition):
     else:
         canvas.create_text(100, 100, text="☁️", font=("Arial", 40))
 
-def animte_sun(self, bright = True):
+def animate_sun(self, bright = True):
     canvas.delete("all")
     x, y = 100, 100
     radius = 30
@@ -66,7 +66,7 @@ def animate_rain(self):
     canvas.after(100, lambda: animate_rain(canvas, drops))
 animate_rain.offset = 0
 
-def animte_snow(self):
+def animate_snow(self):
     canvas.delete("all")
     draw_cloud(canvas)
 
@@ -83,7 +83,7 @@ def animte_snow(self):
     canvas.after(150, lambda: animate_snow(canvas, flakes))
 animate_snow.offset = 0
 
-def animte_storm(self):
+def animate_storm(self):
     canvas.delete("all")
     draw_cloud(canvas)
 

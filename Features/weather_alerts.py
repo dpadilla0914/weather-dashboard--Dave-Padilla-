@@ -31,6 +31,8 @@ def load_preferences():
     prefs.setdefault("alert_high", 35.0)
     prefs.setdefault("alert_low", -5.0)
 
+    return prefs
+
 def save_preferences(prefs):
     with open(PREF_FILENAME, "w") as f:
         json.dump(prefs, f, indent=4)

@@ -4,6 +4,12 @@ Feature: Tomorrow's Guess
 -Predicts tomorrows weather based on basic prediction logic. Shows confidence levels and accuracy tracking
 """
 
+import os
+import json
+import random
+
+GUESS_FILE = "guesses.json" #To store predictions
+
 def predict_tomorrow(city):
     forecast = get_forecast(city, days=2)
     if len(forecast) < 2:

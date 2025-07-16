@@ -10,8 +10,8 @@ import os
 PREF_FILENAME = "preferences.json"
 
 def load_preferences():
-    if not oss.path.exists(PREF_FILENAME):
-        return {"theme": "light", "untis": "metric"}
+    if not os.path.exists(PREF_FILENAME):
+        return {"theme": "light", "untis": "metric"} #Default preferences
 
     with open(PREF_FILENAME, "r") as f:
         try:
@@ -23,7 +23,7 @@ def load_preferences():
         except JSONDecodeError:
             return {"theme": "light", "units": "metric"}
 
-def save_preferences():
+def save_preferences(preferences):
     with open(PREF_FILENAME, "w") as f:
         json.dump(preferences, f, indent = 4)
 
@@ -53,6 +53,7 @@ def get_theme_colors(theme, weather_condition = None):
 
     colors = themes.get(theme.lower(), themes["light"]).copy()
 
+    #Overirde primary color with weather accent
     if weather_condition:
         accent = weather_accents.get(weather_condition.lower())
         if accent:
