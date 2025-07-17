@@ -7,6 +7,7 @@ Feature: Trend Detection
 def detect_trend(temps):
     trends = []
     for i in range(1, len(temps)):
+        
         if temps[i] > temps[i - 1]:
             trends.append("↑")
         elif temps[i] < temps[i - 1]:
@@ -16,6 +17,7 @@ def detect_trend(temps):
     return trends
 
 def analyze_pattern(temps):
+    
     if len(temps) < 2:
         return "Not enough data to analyze."
 

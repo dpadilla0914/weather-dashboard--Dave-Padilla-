@@ -49,7 +49,7 @@ def remove_favorite(city):
     else:
         print(f"{city} is not in your favorites.")
 
-    def show_favorites():
+def show_favorites():
         cities = load_favorites()
         if not cities:
             print("No favorite cities saved.")

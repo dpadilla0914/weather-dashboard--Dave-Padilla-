@@ -10,7 +10,7 @@ import tkinter as tk
 from datetime import datetime
 
 def get_forecast(city, days = 7):
-    geocode_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={API_KEY}"
+    geocode_url = (f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={API_KEY}")
     response = requests.get(geocode_url)
     data = response.json()
 
