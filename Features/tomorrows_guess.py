@@ -79,3 +79,24 @@ def calculate_accuracy():
     else:
         accuracy = round((correct / total) * 100, 2)
         print(f"Prediction accuracy: {accuracy}% ({correct} correct out of {total})")
+
+def update_actual_result(index, actual):
+    if not os.path.exists(GUESS_FILE):
+        return False, "No guess data found."
+
+    with open(GUESS_FILE, "r") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError:
+            return False, "Guess file corrupted."
+
+    if index < 0 or index >= len(data):
+        return False, "Invalid guess selection."
+
+    data[index]["actual"] = actual
+    data[index]["matched"] = (data[index]["guess"] == actual)
+
+    with open(GUESS_FILE, "w") as f:
+        json.dump(data, f, indent=4)
+
+    return True, "Actual result updated."

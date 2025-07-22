@@ -3,7 +3,7 @@
 -Suggest activity based on weather
 """
 
-def suggest_activity(weather)
+def suggest_activity(weather):
 
     #Convert input to lowercase for consistency
     weather = weather.lower()

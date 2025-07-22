@@ -11,7 +11,7 @@ PREF_FILENAME = "preferences.json"
 
 def load_preferences():
     if not os.path.exists(PREF_FILENAME):
-        return {"theme": "light", "untis": "metric"} #Default preferences
+        return {"theme": "light", "units": "metric"} #Default preferences
 
     with open(PREF_FILENAME, "r") as f:
         try:

@@ -32,26 +32,3 @@ def get_forecast(city, days = 7):
         result.append((date, temp))
 
     return result
-
-def plot_graph(city)
-    forecast = get_forecast(city)
-    dates = [day for day, temp in forecast]
-    temps = [temp for day, temp in forecast]
-
-    root = tk.Tk()
-    root.title(f"Temperature History for {city}")
-
-    fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot(dates, temps, marker='o', linestyle='-', color='b')
-    ax.set_title(f"Temperature Over Last {len(dates)} Days")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Temperature (°C)")
-    ax.grid(True)
-    plt.xticks(rotation=45)
-
-    # Embed plot in tkinter window
-    canvas = FigureCanvasTkAgg(fig, master=root)
-    canvas.draw()
-    canvas.get_tk_widget().pack()
-
-    root.mainloop()
