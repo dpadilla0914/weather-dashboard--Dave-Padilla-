@@ -1,8 +1,4 @@
 #Api keys
 
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-
-api_key = os.getenv(f14e8e305e4ec6faf9982d670e446651)
+API_KEY= ("e5eb15476fed360e2c3a04f0328e4a4f")
