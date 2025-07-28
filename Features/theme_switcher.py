@@ -6,6 +6,7 @@ Feature: Theme Switcher
 
 import json
 import os
+from json.decoder import JSONDecodeError
 
 PREF_FILENAME = "preferences.json"
 

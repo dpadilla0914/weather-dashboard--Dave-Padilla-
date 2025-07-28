@@ -23,6 +23,6 @@ def suggest_activity(weather):
     elif "storm" in weather or "thunder" in weather:
         return "Better to stay indoors during a storm. Try a new recipe or playing some games."
 
-    #Suggestion if unclear or unrecognized wether input.
+    #Suggestion if unclear or unrecognized weather input.
     else:
         return "Weather is a bit unclear. Go with what feels good."
