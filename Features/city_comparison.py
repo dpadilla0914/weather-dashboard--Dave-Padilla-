@@ -3,27 +3,27 @@
 -Compare 2 or more cities and show temperature differences
 """
 
-def city_comparison(weather_data = None):
-    
-    #If no data provided, uses default set of citites
-    if weather_data is None:
-        weather_data = {
-            "New York": 28,
-            "London": 22,
-            "Tokyo": 31
-        }
+import requests
 
-    output_lines = [] #Stores comparison of output lines
-    cities = list(weather_data.keys()) #Get a list of city names from dictionary
+def get_current_temperature(city, api_key):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={api_key}"
+    response = requests.get(url)
+    data = response.json()
 
-    #Compare each pair of cities
-    for i in range(len(cities)):
-        for j in range(i + 1, len(cities)):
-            city1 = cities[i]
-            city2 = cities[j]
-            diff = abs(weather_data[city1] - weather_data[city2]) #Calculates absolute temp
-            output_lines.append(f"The temperature difference between {city1} and {city2} is {diff}°C.")
+    if response.status_code != 200:
+        raise Exception(data.get("message", "API error"))
 
-    #Join all lines with newline characters and return the final result
-    return "\n".join(output_lines)
+    return data["main"]["temp"]
 
+def compare_cities(city1, city2, api_key):
+    temp1 = get_current_temperature(city1, api_key)
+    temp2 = get_current_temperature(city2, api_key)
+    diff = abs(temp1 - temp2)
+
+    return {
+        "city1": city1,
+        "temp1": temp1,
+        "city2": city2,
+        "temp2": temp2,
+        "difference": diff
+    }

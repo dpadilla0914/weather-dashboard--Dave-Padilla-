@@ -1,0 +1,9 @@
+{
+    "theme": "light",
+    "units": "metric",
+    "custom_colors": {
+        "background": "#b484bd",
+        "primary": "#cf72b4",
+        "secondary": "#4e80f3"
+    }
+}
