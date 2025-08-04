@@ -1,12 +1,19 @@
-#activity_suggester.py
-"""Feature: Activity Suggester
--Suggest activity based on weather
+# activity_suggester.py
 """
+Feature: Activity Suggester
+- Suggest activity and tea pairing based on weather condition.
+"""
+
 import os
 import csv
 import random
 
 def load_teas_by_weather(folder_path='csv_data'):
+    """
+    Load teas from CSV files grouped by weather_type (case-insensitive keys).
+    
+    Expected CSV headers: tea_name, weather_type, optional description.
+    """
     base_dir = os.path.dirname(os.path.abspath(__file__))
     full_folder_path = os.path.normpath(os.path.join(base_dir, '..', 'Docs', folder_path))
 
@@ -27,7 +34,7 @@ def load_teas_by_weather(folder_path='csv_data'):
                     raise ValueError(f"Missing required CSV headers: {missing} in {filename}")
 
                 for row in reader:
-                    weather_key = row['weather_type'].lower()
+                    weather_key = row['weather_type'].strip().lower()
                     tea_info = {
                         'name': row['tea_name'].strip(),
                         'description': row.get('description', '').strip()
@@ -37,13 +44,23 @@ def load_teas_by_weather(folder_path='csv_data'):
     return teas_by_weather
 
 def suggest_activity(weather):
-    weather = weather.lower()
+    """
+    Suggest an activity and tea based on the given weather condition.
+    
+    Args:
+        weather (str): Weather condition string (case-insensitive).
+    
+    Returns:
+        str: Suggestion message with emoji, activity, and tea pairing.
+    """
+    weather = weather.strip().lower()
     teas_by_weather = load_teas_by_weather()
 
     matching_teas = teas_by_weather.get(weather, [])
     if matching_teas:
         tea = random.choice(matching_teas)
     else:
+        # If no matching teas found, pick a random tea from all
         all_teas = [tea for teas in teas_by_weather.values() for tea in teas]
         tea = random.choice(all_teas) if all_teas else {'name': 'your favorite', 'description': ''}
 
@@ -59,7 +76,7 @@ def suggest_activity(weather):
     }
     icon = next((emoji for key, emoji in weather_icons.items() if key in weather), "🌈")
 
-    # Activity message
+    # Activity message based on weather keywords
     if "sun" in weather:
         activity = "It's sunny! How about going for a hike or a picnic?"
     elif "rain" in weather:
