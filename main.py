@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, colorchooser
-from Features import activity_suggester, city_comparison, favorite_cities, temperature_graph, theme_switcher
+from Features import activity_suggester, favorite_cities, temperature_graph, theme_switcher
 from Features import weather_icons
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from config import API_KEY
@@ -41,7 +41,6 @@ class WeatherDashboard(tk.Tk):
         # List of features/buttons to show in the sidebar
         features = [
             ("Activity Suggester", self.show_activity_suggester),
-            ("City Comparison", self.show_city_comparison),
             ("Favorite Cities", self.show_favorite_cities_ui),
             ("Temperature Graph", self.show_temp_graph),
             ("Theme Switcher", self.show_theme_switcher),
@@ -231,45 +230,6 @@ class WeatherDashboard(tk.Tk):
         city_entry.bind("<Return>", lambda e: plot_forecast())
 
 
-    def show_city_comparison(self):
-        
-        self.clear_main_area()
-
-        tk.Label(self.main_area, text="Compare Two Cities", font=("Arial", 16),
-                 bg=self.theme_colors["background"], fg=self.theme_colors["text"]).pack(pady=10)
-
-        tk.Label(self.main_area, text="City 1:", bg=self.theme_colors["background"],
-                 fg=self.theme_colors["text"]).pack()
-        city1_entry = tk.Entry(self.main_area)
-        city1_entry.pack()
-
-        tk.Label(self.main_area, text="City 2:", bg=self.theme_colors["background"],
-                 fg=self.theme_colors["text"]).pack()
-        city2_entry = tk.Entry(self.main_area)
-        city2_entry.pack()
-
-        compare_btn = tk.Button(self.main_area, text="Compare",
-                                command=lambda: self.handle_compare(city1_entry.get(), city2_entry.get()),
-                                bg=self.theme_colors["primary"], fg="white")
-        compare_btn.pack(pady=10)
-
-        self.compare_result = tk.Text(self.main_area, height=8, width=60,
-                                      bg=self.theme_colors["background"], fg=self.theme_colors["text"])
-        self.compare_result.pack()
-
-    def handle_compare(self, city1, city2):
-        # Fetch and display temperature comparison between two cities
-        self.compare_result.delete(1.0, tk.END)
-
-        if not city1 or not city2:
-            messagebox.showwarning("Input Error", "Please enter both city names.")
-            return
-
-        try:
-            comparison = city_comparison.compare_cities(city1, city2)
-            self.compare_result.insert(tk.END, comparison)
-        except Exception as e:
-            messagebox.showerror("Comparison Error", f"Could not compare cities:\n{e}")
 
     def show_activity_suggester(self):
         self.clear_main_area()

@@ -1,7 +1,7 @@
 {
     "theme": "light",
     "use_custom_colors": true,
-    "custom_background": "#400040",
-    "custom_primary": "#b8bac7",
-    "custom_sidebar": "#93639c"
+    "custom_background": "#b3664d",
+    "custom_primary": "#f887ec",
+    "custom_sidebar": "#8f6b94"
 }
